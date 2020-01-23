@@ -16,8 +16,11 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
 	// use named entity graph from the Post model object
 	@Override
-	@EntityGraph(value="Post.withAuthor",type=EntityGraphType.FETCH)
+	@EntityGraph(value="Post.withAuthor",type=EntityGraphType.LOAD)
 	Page<Post> findAll(Pageable pageable);
+	
+	
+	// other approaches....
 	
 	// or define an ad hoc entitygraph
 	@EntityGraph(attributePaths = {"author"})

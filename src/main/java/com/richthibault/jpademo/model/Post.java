@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
-import javax.persistence.NamedSubgraph;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -21,26 +20,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "posts")
-// to add more graphs, wrap in @NamedEntityGraphs({})
 @NamedEntityGraph(name = "Post.withAuthor",
-	attributeNodes = {
-		@NamedAttributeNode("id"),
-		@NamedAttributeNode("title"),
-		@NamedAttributeNode(value="author",subgraph="author-subgraph"),
-		@NamedAttributeNode("createDate")
-	},
-	subgraphs = {
-		    @NamedSubgraph(
-		      name = "author-subgraph",
-		      attributeNodes = {
-		    	@NamedAttributeNode("id"),
-		        @NamedAttributeNode("firstName"),
-		        @NamedAttributeNode("lastName"),
-		        @NamedAttributeNode("email")
-		      }
-		    )
-		  }
-)
+attributeNodes = {
+	@NamedAttributeNode("author")
+})
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Post {
 	

@@ -1,5 +1,7 @@
 package com.richthibault.jpademo;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,9 +29,13 @@ public class PostService {
 
 	public Page<Post> getPosts(int page) {
 		logger.debug("Getting page {}", page);
-		Pageable pageRequest = PageRequest.of(page, 100, 
+		Pageable pageRequest = PageRequest.of(page, 10000, 
 				Sort.by(Sort.Direction.DESC, "id"));
 		return postRepo.findAll(pageRequest);
+	}
+	
+	public List<Post> getPostsByLastName(String lastName) {
+		return postRepo.findByAuthorLastName(lastName);
 	}
 
 }
