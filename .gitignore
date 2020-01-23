@@ -31,3 +31,4 @@ build/
 .vscode/
 
 hbnpojogen-config.xml
+.DS_Store
